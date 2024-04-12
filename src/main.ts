@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import store, { configStore, userStore } from './stores'
+import 'amfe-flexible' // 导入自适应
 import App from './App.vue'
 import router from './router'
 import Icons from '@/components/icons'

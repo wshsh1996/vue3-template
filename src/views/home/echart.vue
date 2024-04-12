@@ -1,16 +1,25 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import echarts from '@/utils/echarts'
-// import type { pieType, turnOverType } from '@/models/home'
 
 const props = defineProps<{
   order: any
-  height?: any
 }>()
 const chart = ref()
+const chartCard = ref()
 let myChart: any = null
+// echarts自适应宽度
+const resizeObserver = new ResizeObserver((entries) => {
+  for (let entry of entries) {
+    if (entry.contentBoxSize) {
+      myChart.resize()
+    }
+  }
+})
+
 onMounted(() => {
   myChart = echarts.init(chart.value)
+  resizeObserver.observe(chartCard.value)
 })
 
 function init() {
@@ -35,7 +44,13 @@ watch(
 </script>
 
 <template>
-  <div ref="chart" :style="'width: 100%; height:' + props.height + 'px'"></div>
+  <div ref="chartCard">
+    <div ref="chart" class="chart_box"></div>
+  </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.chart_box {
+  height: 280px;
+}
+</style>
