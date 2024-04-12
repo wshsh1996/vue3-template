@@ -19,7 +19,7 @@ const dateNum = ref(1)
 const orderCustomCount = ref<turnOverType>({
   title: '',
   grid: {
-    show: false,
+    show: false, // 图表边框的显示隐藏
     top: '16%', // 一下数值可为百分比也可为具体像素值
     right: '2%',
     bottom: '10%',
@@ -86,20 +86,23 @@ const orderCustomCount = ref<turnOverType>({
 // 创建商品分类销售占比
 const orderCategoryInfo = ref<pieType>({
   title: '',
+  // 提示组件
   tooltip: {
     trigger: 'item',
     formatter: '{b} : {c} ({d}%)'
   },
+  // 图例组件
   legend: {
     bottom: '5%',
     data: ['手机', '玩乐', '淘淘']
   },
+  // 配置项
   series: [
     {
-      type: 'pie',
-      radius: [30, 80],
-      center: ['50%', '40%'],
-      roseType: 'area',
+      type: 'pie', // 图表类型，必选项
+      radius: [30, 80], // 饼图的半径 也可百分比 ‘20%’字符串形式
+      center: ['50%', '50%'], // 饼状图通过该属性调节位置，不是grid
+      roseType: 'area', // 是否启用南丁格尔图模式 'radius' 扇区圆心角展现数据的百分比，半径展现数据的大小 'area' 所有扇区圆心角相同，仅通过半径展现数据大小
       itemStyle: {
         borderRadius: 5
       },
@@ -180,9 +183,9 @@ const orderSalesData = ref<turnOverType>({
   grid: {
     show: false,
     top: '16%', // 一下数值可为百分比也可为具体像素值
-    right: '2%',
+    right: '5%',
     bottom: '10%',
-    left: '8%'
+    left: '5%'
   },
   tooltip: {
     trigger: 'axis',
