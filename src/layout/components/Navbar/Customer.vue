@@ -6,11 +6,10 @@ const dialogVisible = ref(false)
 
 <template>
   <div class="customer">
-    <img src="../../../assets/custom.png" alt="" />
+    <img src="@/assets/header/custom.png" alt="" />
     <el-button link plain @click="dialogVisible = true">在线客服</el-button>
     <el-dialog v-model="dialogVisible" width="360" :show-close="false" align-center>
       <div class="dialog_style">
-        <!--        <div class="left_box"></div>-->
         <div class="right_box">
           <div class="top_img"></div>
           <div class="bottom_name">扫码添加客服</div>
@@ -34,7 +33,7 @@ const dialogVisible = ref(false)
 }
 :deep(.el-dialog__body) {
   height: 360px;
-  background: url('../../../assets/dialog_bc.png') no-repeat;
+  background: url('@/assets/initImg/dialog_bc.png') no-repeat;
   background-size: 100% 100%;
 }
 .dialog_style {
@@ -63,7 +62,6 @@ const dialogVisible = ref(false)
     .top_img {
       width: 200px;
       height: 200px;
-      background-color: pink;
       border-radius: 10px;
     }
     .bottom_name {

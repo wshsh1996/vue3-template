@@ -2,7 +2,7 @@
 
 <template>
   <div class="document">
-    <img src="../../../assets/document.png" alt="" />
+    <img src="@/assets/header/document.png" alt="" />
     <el-button link plain>帮助文档</el-button>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <svg-icon icon="el-icon-full-screen" @click="toggleFullScreen" />
+  <svg-icon class="full-screen" icon="el-icon-full-screen" @click="toggleFullScreen" />
 </template>
 
 <script setup lang="ts">
@@ -16,3 +16,8 @@ const toggleFullScreen = () => {
   fullscreenStatus.value = !fullscreenStatus.value
 }
 </script>
+<style lang="scss" scoped>
+.full-screen {
+  margin-right: 20px;
+}
+</style>

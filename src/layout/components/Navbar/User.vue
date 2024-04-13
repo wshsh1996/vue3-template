@@ -49,6 +49,7 @@ provide('logout', logout)
 
 <style lang="scss" scoped>
 .avatar-container {
+  margin-right: 15px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
