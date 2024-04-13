@@ -7,7 +7,7 @@
   >
     <template #title>
       <menu-icon v-if="showIcon && menu.meta.icon" :icon="menu.meta.icon"></menu-icon>
-      <span>{{ menu.meta.title }}</span>
+      <span class="menu-title">{{ menu.meta.title }}</span>
     </template>
     <menu-item v-for="children in menu.children" :key="children.path" :menu="children"></menu-item>
   </el-sub-menu>
@@ -17,9 +17,9 @@
     :index="menu.path"
     @click="handleClickMenu(menu)"
   >
-    <menu-icon v-if="showIcon && menu.meta.icon" :icon="menu.meta.icon" />
     <template #title>
-      {{ menu.meta.title }}
+      <menu-icon v-if="showIcon && menu.meta.icon" :icon="menu.meta.icon" />
+      <span class="menu-title">{{ menu.meta.title }}</span>
     </template>
   </el-menu-item>
 </template>
@@ -63,6 +63,7 @@ const handleClickMenu = (menu: any) => {
 }
 </script>
 <style lang="scss" scoped>
-.menu-item-express {
+.menu-title {
+  margin-left: 10px;
 }
 </style>

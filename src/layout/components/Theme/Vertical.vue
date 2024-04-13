@@ -111,7 +111,7 @@ const layoutHeaderHeight = computed(() => {
     }
   }
 }
-
+// 展开侧边栏
 .vertical-menu-item {
   padding: 0 44px 0 22px;
   display: flex;
@@ -122,6 +122,11 @@ const layoutHeaderHeight = computed(() => {
     color: #b6b7ba;
   }
 }
+.vertical-menu .title:hover {
+  color: var(--theme-menu-hover-color);
+}
+
+// 收缩侧边栏样式
 .vertical-menu-item-express {
   padding: 0;
   justify-content: center;

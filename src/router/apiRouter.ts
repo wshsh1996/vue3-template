@@ -25,41 +25,12 @@ const apiRouter: IMenu[] = [
   {
     path: '/order',
     name: 'order',
-    redirect: '/order/orderManage',
+    component: '/order/orderManage/index',
     meta: {
-      title: '订单',
+      title: '订单管理',
       icon: 'order',
       permission: ['order']
-    },
-    children: [
-      {
-        path: '/order/orderManage',
-        name: 'orderManage',
-        component: '/order/orderManage/index',
-        meta: {
-          title: '订单管理',
-          permission: ['orderManage']
-        }
-      },
-      {
-        path: '/order/orderSet',
-        name: 'orderSet',
-        component: '/order/orderSet/index',
-        meta: {
-          title: '订单配置',
-          permission: ['orderSet']
-        }
-      },
-      {
-        path: '/order/orderAfter',
-        name: 'orderAfter',
-        component: '/order/orderAfter/index',
-        meta: {
-          title: '售后订单',
-          permission: ['orderAfter']
-        }
-      }
-    ]
+    }
   },
   {
     path: '/marketing',
@@ -72,62 +43,13 @@ const apiRouter: IMenu[] = [
     },
     children: [
       {
-        path: '/marketing/creditsManage',
-        name: 'creditsManage',
-        redirect: '/marketing/creditsManage/creditsGoods',
+        path: '/marketing/credit',
+        name: 'credit',
+        component: '/marketing/creditsManage/creditsGoods/index',
         meta: {
-          title: '积分管理',
-          permission: ['creditsManage']
-        },
-        children: [
-          {
-            path: '/marketing/creditsManage/creditsGoods',
-            name: 'creditsGoods',
-            component: '/marketing/creditsManage/creditsGoods/index',
-            meta: {
-              title: '积分商品',
-              permission: ['creditsGoods']
-            }
-          },
-          {
-            path: '/marketing/creditsManage/creditsOrder',
-            name: 'creditsOrder',
-            component: '/marketing/creditsManage/creditsOrder/index',
-            meta: {
-              title: '积分订单',
-              permission: ['creditsOrder']
-            }
-          },
-          {
-            path: '/marketing/creditsManage/creditsSet',
-            name: 'creditsSet',
-            component: '/marketing/creditsManage/creditsSet/index',
-            meta: {
-              title: '积分配置',
-              permission: ['creditsSet']
-            }
-          }
-        ]
-      },
-      {
-        path: '/marketing/saveValue',
-        name: 'saveValue',
-        redirect: '/marketing/saveValue/saveType',
-        meta: {
-          title: '储值',
-          permission: ['saveValue']
-        },
-        children: [
-          {
-            path: '/marketing/saveValue/saveType',
-            name: 'saveType',
-            component: '/marketing/saveValue/saveType/index',
-            meta: {
-              title: '储值类型',
-              permission: ['saveType']
-            }
-          }
-        ]
+          title: '积分商品',
+          permission: ['credit']
+        }
       }
     ]
   },
@@ -192,53 +114,6 @@ const apiRouter: IMenu[] = [
       permission: ['setting']
     },
     children: [
-      {
-        path: '/setting/delivery',
-        name: 'delivery',
-        component: '/setting/delivery',
-        meta: {
-          title: '配送设置',
-          permission: ['delivery']
-        },
-        children: [
-          {
-            path: '/setting/delivery/freightSet',
-            name: 'freightSet',
-            component: '/setting/delivery/freightSet/index',
-            meta: {
-              title: '运费设置',
-              permission: ['freightSet']
-            }
-          },
-          {
-            path: '/setting/delivery/logistics',
-            name: 'logistics',
-            component: '/setting/delivery/logistics/index',
-            meta: {
-              title: '物流公司',
-              permission: ['logistics']
-            }
-          },
-          {
-            path: '/setting/delivery/pickupManage',
-            name: 'pickupManage',
-            component: '/setting/delivery/pickupManage/index',
-            meta: {
-              title: '自提点管理',
-              permission: ['pickupManage']
-            }
-          }
-        ]
-      },
-      {
-        path: '/setting/logo',
-        name: 'logo',
-        component: '/setting/logo/index',
-        meta: {
-          title: 'logo配置',
-          permission: ['logo']
-        }
-      },
       {
         path: '/setting/agreement',
         name: 'agreement',

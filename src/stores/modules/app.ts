@@ -15,7 +15,7 @@ const useAppStore = defineStore('app-store', {
     theme: {
       sidebarStyle: 'dark', // sidebar 样式 light/dark
       headerStyle: 'light', // header 样式  light/theme
-      primaryColor: '#0256ff', // 主题色
+      primaryColor: '#c20420', // 主题色 #0256ff
       layout: 'vertical', // 布局方式 columns/vertical/transverse
       uniqueOpened: true, // 是否只保持一个子菜单的展开
       isLogo: true, // 是否显示 logo

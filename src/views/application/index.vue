@@ -130,4 +130,7 @@ const changeStatus = async (name: string, enabled: boolean) => {
 .grey {
   filter: grayscale(100%);
 }
+.parmary-color {
+  color: var(--el-color-primary);
+}
 </style>
