@@ -50,10 +50,12 @@ a:hover {
     .el-scrollbar__view {
       overflow: hidden;
     }
+    // 侧边栏展开
     &.aside-expend {
       width: 230px !important;
       transition: width 0.3s ease;
     }
+    // 侧边栏收缩
     &.aside-compress {
       width: 64px !important;
       transition: width 0.3s ease;

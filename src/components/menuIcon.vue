@@ -1,8 +1,5 @@
 <template>
-  <!--  <el-icon class="svg-icon">-->
-  <!--    <component :is="props.icon"></component>-->
-  <!--  </el-icon>-->
-  <img v-if="props.icon" style="margin: 0 10px" :src="getImageUrl(props.icon)" alt="" />
+  <img v-if="props.icon" class="img-icon" :src="getImageUrl(props.icon)" alt="" />
 </template>
 
 <script setup lang="ts">
@@ -18,17 +15,15 @@ const props = defineProps({
 
 // 动态使用本地图片
 const getImageUrl = (code: any) => {
-  return new URL(`../assets/${code}.png`, import.meta.url).href
+  return new URL(`../assets/menu/${code}.png`, import.meta.url).href
 }
 </script>
 
-<style scoped>
-.svg-icon svg {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
-  flex-shrink: 0;
+<style lang="scss" scoped>
+.img-icon {
+  margin: 0 10px;
+  width: 16px;
+  height: 16px;
+  color: #b6b7ba;
 }
 </style>

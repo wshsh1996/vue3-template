@@ -1,5 +1,5 @@
 <template>
-  <el-sub-menu v-if="menu.children.length > 0 && show(menu)" :key="menu.path" :index="menu.path">
+  <el-sub-menu v-if="menu.children.length > 0" :key="menu.path" :index="menu.path">
     <template #title>
       <menu-icon v-if="showIcon && menu.meta.icon" :icon="menu.meta.icon"></menu-icon>
       <span>{{ menu.meta.title }}</span>
@@ -7,7 +7,7 @@
     <menu-item v-for="children in menu.children" :key="children.path" :menu="children"></menu-item>
   </el-sub-menu>
   <el-menu-item
-    v-else-if="menu.children.length === 0 && show(menu)"
+    v-else-if="menu.children.length === 0"
     :key="`else-${menu.path}`"
     :index="menu.path"
     @click="handleClickMenu(menu)"
@@ -56,13 +56,5 @@ const handleClickMenu = (menu: any) => {
     // 内部组件
     window.open('#' + menu.meta.url, '_blank')
   }
-}
-
-const show = (menu: any) => {
-  const plugin: string = data_get(menu, 'meta.pluginSlug', '')
-  if (plugin) {
-    return configStore.enabled_plugins.includes(plugin)
-  }
-  return true
 }
 </script>

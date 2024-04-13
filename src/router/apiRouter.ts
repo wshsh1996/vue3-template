@@ -7,7 +7,7 @@ const apiRouter: IMenu[] = [
     redirect: '/modules',
     meta: {
       title: '封装组件',
-      icon: 'modules',
+      icon: 'application',
       permission: ['modules']
     },
     children: [

@@ -7,7 +7,12 @@
           <router-link to="/home">
             <div class="vertical-menu-item" :class="{ active: defaultActive === '/home' }">
               <menu-icon icon="home" />
-              <span class="title" :class="{ active: defaultActive === '/home' }">系统首页</span>
+              <span
+                v-if="appStore.sidebarOpened"
+                class="title"
+                :class="{ active: defaultActive === '/home' }"
+                >系统首页</span
+              >
             </div>
           </router-link>
         </div>
@@ -60,8 +65,9 @@ const defaultActive = computed(() => {
 
 const headerClass = computed(() => (appStore.theme.headerStyle === 'theme' ? 'header-theme' : ''))
 
+// 侧边栏样式
 const sidebarClass = computed(() => {
-  const sidebarOpened = appStore.sidebarOpened ? 'aside-expend' : 'aside-compress'
+  const sidebarOpened = appStore.sidebarOpened ? 'aside-expend' : 'aside-compress' // aside-expend 展开 aside-compress 收缩 layout.scss
   const isDark = appStore.theme.sidebarStyle === 'dark' ? 'sidebar-dark' : ''
   return sidebarOpened + ' ' + isDark
 })
@@ -101,7 +107,7 @@ const layoutHeaderHeight = computed(() => {
 }
 
 .vertical-menu-item {
-  padding: 0 44px 0 20px;
+  padding: 0 44px 0 22px;
   display: flex;
   align-items: center;
   height: 50px;
@@ -113,9 +119,5 @@ const layoutHeaderHeight = computed(() => {
 .active {
   color: #fff !important;
   background-color: var(--el-color-primary);
-}
-
-.layout-container .layout-sidebar.aside-expend {
-  width: 200px !important;
 }
 </style>

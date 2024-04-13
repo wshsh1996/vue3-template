@@ -3,10 +3,15 @@
     <span class="logo-title" v-if="appStore.theme.layout === 'columns'">{{
       appStore.text.title
     }}</span>
-    <el-icon v-if="appStore.sidebarOpened" class="icon-left" @click="appStore.sidebarOpened = false"
-      ><Fold
-    /></el-icon>
-    <el-icon v-else class="icon-left" @click="appStore.sidebarOpened = true"><Expand /></el-icon>
+    <div v-if="appStore.theme.layout === 'vertical'">
+      <el-icon
+        v-if="appStore.sidebarOpened"
+        class="icon-left"
+        @click="appStore.sidebarOpened = false"
+        ><Fold
+      /></el-icon>
+      <el-icon v-else class="icon-left" @click="appStore.sidebarOpened = true"><Expand /></el-icon>
+    </div>
     <Breadcrumb v-if="appStore.theme.isBreadcrumb" />
   </div>
 </template>
@@ -15,7 +20,6 @@
 import { appStore } from '@/stores'
 import { Expand, Fold } from '@element-plus/icons-vue'
 import Breadcrumb from './Breadcrumb.vue'
-import { ref } from 'vue'
 </script>
 
 <style lang="scss" scoped>

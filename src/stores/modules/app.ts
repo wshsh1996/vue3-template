@@ -9,8 +9,8 @@ const useAppStore = defineStore('app-store', {
     text: {
       loginTitle: '',
       loginDesc: '',
-      title: '开源商城',
-      minTitle: '电商管理系统'
+      title: '后台管理',
+      minTitle: 'vue3-ts-admin'
     },
     theme: {
       sidebarStyle: 'dark', // sidebar 样式 light/dark

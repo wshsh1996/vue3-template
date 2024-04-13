@@ -1,15 +1,15 @@
 <template>
   <div class="sidebar-logo sidebar-logo-expend">
-    <div v-if="configStore.admin_login_image" class="logo_icon">
-      <oss-image :paths="[configStore.logo]" :width="36" :height="36"></oss-image>
+    <div class="logo_icon">
+      <menu-icon icon="logo"></menu-icon>
     </div>
-    <span class="logo_name">{{ appStore.text.minTitle }}</span>
+    <span class="logo-title">{{ appStore.text.minTitle }}</span>
   </div>
 </template>
 
 <script setup lang="ts">
-import { appStore, configStore } from '@/stores'
-import OssImage from '@/components/OssImage.vue'
+import { appStore } from '@/stores'
+import MenuIcon from '@/components/menuIcon.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -25,11 +25,11 @@ import OssImage from '@/components/OssImage.vue'
   color: var(--theme-logo-text-color);
   font-size: 18px;
   img {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
   }
   .logo-title {
-    margin-left: 10px;
   }
 }
 .sidebar-logo-expend {
