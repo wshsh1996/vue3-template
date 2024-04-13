@@ -8,8 +8,7 @@
             <div
               class="vertical-menu-item"
               :class="{
-                active: defaultActive === '/home',
-                'vertical-menu-item-express': !appStore.sidebarOpened
+                active: defaultActive === '/home'
               }"
             >
               <menu-icon icon="home" />
@@ -113,7 +112,7 @@ const layoutHeaderHeight = computed(() => {
 }
 // 展开侧边栏
 .vertical-menu-item {
-  padding: 0 44px 0 22px;
+  padding: 0 44px 0 20px;
   display: flex;
   align-items: center;
   height: 50px;
@@ -124,12 +123,6 @@ const layoutHeaderHeight = computed(() => {
 }
 .vertical-menu .title:hover {
   color: var(--theme-menu-hover-color);
-}
-
-// 收缩侧边栏样式
-.vertical-menu-item-express {
-  padding: 0;
-  justify-content: center;
 }
 
 .active {

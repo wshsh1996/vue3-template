@@ -23,6 +23,9 @@ dependencies:
   amfe-flexible:
     specifier: ^2.2.1
     version: 2.2.1
+  animate.css:
+    specifier: ^4.1.1
+    version: 4.1.1
   axios:
     specifier: ^1.6.0
     version: 1.6.0
@@ -1123,6 +1126,10 @@ packages:
 
   /amfe-flexible@2.2.1:
     resolution: {integrity: sha512-L2VfvDzoETBjhRptg5u/IUuzHSuxm22JpSRb404p/TBGeRfwWmmNEbB+TFPIP/sS/+pbM18bCFH9QnMojLuPNw==}
+    dev: false
+
+  /animate.css@4.1.1:
+    resolution: {integrity: sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ==}
     dev: false
 
   /ansi-regex@2.1.1:

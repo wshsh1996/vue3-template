@@ -1,9 +1,14 @@
 <template>
   <div class="sidebar-logo sidebar-logo-expend">
-    <div class="logo_icon">
-      <menu-icon class="logo_icon_item" icon="logo"></menu-icon>
-    </div>
-    <span v-if="appStore.sidebarOpened" class="logo-title">{{ appStore.text.minTitle }}</span>
+    <transition enter-active-class="animate__animated animate__fadeInLeft">
+      <div class="logo_icon" v-if="appStore.sidebarOpened">
+        <menu-icon class="logo_icon_item" icon="logo"></menu-icon>
+        <span class="logo-title">{{ appStore.text.minTitle }}</span>
+      </div>
+      <div v-else class="logo_icon">
+        <menu-icon class="logo_icon_item" icon="logo"></menu-icon>
+      </div>
+    </transition>
   </div>
 </template>
 

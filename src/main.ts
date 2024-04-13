@@ -10,6 +10,7 @@ import AuthDirective from '@/utils/authDirective'
 
 import 'element-plus/dist/index.css'
 import '@/assets/main.scss'
+import 'animate.css'
 import '@/assets/iconfonts/iconfont.css'
 import { ApiInit } from '@/api/comment'
 

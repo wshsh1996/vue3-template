@@ -17,8 +17,8 @@
     :index="menu.path"
     @click="handleClickMenu(menu)"
   >
+    <menu-icon v-if="showIcon && menu.meta.icon" :icon="menu.meta.icon" />
     <template #title>
-      <menu-icon v-if="showIcon && menu.meta.icon" :icon="menu.meta.icon" />
       <span class="menu-title">{{ menu.meta.title }}</span>
     </template>
   </el-menu-item>
