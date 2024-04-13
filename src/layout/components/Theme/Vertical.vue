@@ -119,6 +119,7 @@ const layoutHeaderHeight = computed(() => {
   .title {
     margin-left: 10px;
     color: #b6b7ba;
+    white-space: nowrap; // 不换行，优化首页menu展开样式
   }
 }
 .vertical-menu .title:hover {
