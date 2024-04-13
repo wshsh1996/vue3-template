@@ -1,5 +1,10 @@
 <template>
-  <el-sub-menu v-if="menu.children.length > 0" :key="menu.path" :index="menu.path">
+  <el-sub-menu
+    v-if="menu.children.length > 0"
+    :class="{ 'menu-item-express': !appStore.sidebarOpened }"
+    :key="menu.path"
+    :index="menu.path"
+  >
     <template #title>
       <menu-icon v-if="showIcon && menu.meta.icon" :icon="menu.meta.icon"></menu-icon>
       <span>{{ menu.meta.title }}</span>
@@ -21,10 +26,9 @@
 
 <script setup lang="ts">
 import { computed, type PropType } from 'vue'
-import { appStore, configStore } from '@/stores'
+import { appStore } from '@/stores'
 import { useRouter } from 'vue-router'
 import MenuIcon from '@/components/menuIcon.vue'
-import { data_get } from '@/utils'
 
 // 显示icon图标
 const showIcon = computed(() => {
@@ -58,3 +62,7 @@ const handleClickMenu = (menu: any) => {
   }
 }
 </script>
+<style lang="scss" scoped>
+.menu-item-express {
+}
+</style>

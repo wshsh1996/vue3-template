@@ -5,7 +5,13 @@
       <el-scrollbar>
         <div class="vertical-menu">
           <router-link to="/home">
-            <div class="vertical-menu-item" :class="{ active: defaultActive === '/home' }">
+            <div
+              class="vertical-menu-item"
+              :class="{
+                active: defaultActive === '/home',
+                'vertical-menu-item-express': !appStore.sidebarOpened
+              }"
+            >
               <menu-icon icon="home" />
               <span
                 v-if="appStore.sidebarOpened"
@@ -112,8 +118,13 @@ const layoutHeaderHeight = computed(() => {
   align-items: center;
   height: 50px;
   .title {
+    margin-left: 10px;
     color: #b6b7ba;
   }
+}
+.vertical-menu-item-express {
+  padding: 0;
+  justify-content: center;
 }
 
 .active {

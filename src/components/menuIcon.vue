@@ -21,9 +21,6 @@ const getImageUrl = (code: any) => {
 
 <style lang="scss" scoped>
 .img-icon {
-  margin: 0 10px;
-  width: 16px;
-  height: 16px;
   color: #b6b7ba;
 }
 </style>
