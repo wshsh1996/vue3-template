@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Echarts from '@/views/home/echart.vue'
+import Echarts from '@/components/echart.vue'
 import { ref } from 'vue'
 import type { dataType, pieType, turnOverType } from '@/models/home'
 import InitDialog from '@/views/home/initDialog.vue'
@@ -561,7 +561,7 @@ const toggleDate = async (num: any, type: any) => {
       padding: 28px 24px 28px 28px;
       display: flex;
       align-items: center;
-      width: 317px;
+      width: 19.5%;
       height: 123px;
       border-radius: 5px;
       background-color: #fff;
@@ -602,7 +602,7 @@ const toggleDate = async (num: any, type: any) => {
   justify-content: space-between;
 
   .cost_times {
-    width: 499px;
+    width: 30%;
 
     .header {
       margin-bottom: 15px;
@@ -630,7 +630,7 @@ const toggleDate = async (num: any, type: any) => {
     }
   }
   .sale_rate {
-    width: 476px;
+    width: 28.6%;
     .header {
       margin-bottom: 15px;
       display: flex;
@@ -656,7 +656,7 @@ const toggleDate = async (num: any, type: any) => {
     }
   }
   .add_user {
-    width: 665px;
+    width: 40%;
     .header {
       margin-bottom: 15px;
       display: flex;
@@ -722,7 +722,7 @@ const toggleDate = async (num: any, type: any) => {
     }
   }
   .sale_rank {
-    width: 39.3%;
+    width: 39.8%;
     .header {
       margin-bottom: 15px;
       display: flex;
