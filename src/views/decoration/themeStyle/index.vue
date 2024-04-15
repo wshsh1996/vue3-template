@@ -1,15 +1,13 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-
 import { ElMessage } from 'element-plus'
-import { ApiGetSet, ApiAllSet } from '@/api/comment'
 
 // 按钮当前选中状态
 const activeColor = ref<any>('')
+const theme_color = ref('#FF4B40')
 // 获取默认的主题theme
 const getTheme = async () => {
-  const { theme_color }: any = await ApiGetSet('theme')
-  activeColor.value = theme_color
+  activeColor.value = theme_color.value
 }
 
 // 设置按钮选中状态
@@ -19,9 +17,9 @@ const setActiveStatus = (e: string) => {
 
 // 保存设置颜色
 const saveColor = () => {
-  ApiAllSet('theme', { theme_color: activeColor.value }).then(() => {
+  setTimeout(() => {
     ElMessage.success('保存成功')
-  })
+  }, 2000)
 }
 
 onMounted(() => {

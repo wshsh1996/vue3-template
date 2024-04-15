@@ -7,9 +7,313 @@ import { ref, watch, nextTick } from 'vue'
 
 const { state, useMode, getDetail } = useCurd({
   url: '/admin/diy',
-  openPage: false
+  openPage: false,
+  autoInit: false
 })
+// 获取table数据模板
+const dataList = ref([
+  {
+    id: 1,
+    style: {
+      backgroundColor: null
+    },
+    name: '默认主题',
+    title: '开源商城',
+    updated_at: '2024-04-11 15:23:01',
+    enabled: true
+  },
+  {
+    id: 2,
+    style: {
+      backgroundColor: '#C11010'
+    },
+    name: '默认主题2',
+    title: '首页',
+    updated_at: '2024-04-08 11:32:38',
+    enabled: false
+  },
+  {
+    id: 3,
+    style: {
+      backgroundColor: '#C11010'
+    },
+    name: '默认主题3',
+    title: '首页',
+    updated_at: '2024-04-08 11:32:38',
+    enabled: false
+  }
+])
 
+// 详情数据模板
+const detailList = {
+  id: 1,
+  name: '默认主题',
+  title: '开源商城',
+  enabled: true,
+  components: [
+    {
+      bind: {
+        radius: true,
+        showIcon: true,
+        textAlign: 'left',
+        backgroundColor: {
+          to: '#F7D8D8',
+          from: '#ffffff'
+        }
+      },
+      name: 'Search',
+      title: '搜索框'
+    },
+    {
+      bind: {
+        lists: [
+          {
+            id: 1,
+            img: 's3://2024/02/27/mIrCb3xO6F6DasHjJZPEXwXyE9lL5HLRntCT9EwK.png',
+            link: null,
+            title: null
+          }
+        ],
+        radius: true,
+        marginTop: 0,
+        paddingLR: 0,
+        indicatorDots: true
+      },
+      name: 'Banner',
+      title: '轮播图组件'
+    },
+    {
+      bind: {
+        list: [
+          {
+            img: 'public://2023/11/13/0HtRkV8pLKrsyYj9AU4HoxluEH8TL6Xe2r15HyYh.png',
+            link: '/pagesHome/sekilling/sekilling',
+            title: '秒杀活动'
+          },
+          {
+            img: 'public://2023/11/13/egce21hEskDb9eX57KalL8T6dpNfyCwgwelzNGU1.png',
+            link: '/pagesUser/integral/integralShop',
+            title: '积分商城'
+          },
+          {
+            img: 'public://2023/11/13/xKJEFtoVyvKngBW9QlOvbbxFdblt5rYSL4DcODTx.png',
+            link: '/pagesHome/group/group',
+            title: '拼团活动'
+          },
+          {
+            img: 'public://2023/11/13/ZHcwUCKq1F4PSytWi9XQSXMqRm3k4bHmgJs3bnUJ.png',
+            link: '/pagesUser/coupon/coupon',
+            title: '领券中心'
+          },
+          {
+            img: 'public://2023/11/13/XGuGeVhdWT346LNqNbbVcKTIUeNK3fA66aeudeWh.png',
+            link: '/pages/category/category?id=2',
+            title: '商品分类'
+          },
+          {
+            img: 'public://2023/11/13/mBATmsPuJGaeQlVrqHtI6mgO4hvnwKOsniCcA9qL.png',
+            link: '/pagesUser/mark/mark',
+            title: '我的收藏'
+          }
+        ],
+        radius: true,
+        preSize: 4
+      },
+      name: 'NavList',
+      title: '导航组'
+    },
+    {
+      bind: {
+        desc: '促销简介',
+        list: [
+          {
+            img: 's3://2023/12/19/fg4WoE0F9m3GWHu3zE4RgDVgB9oboXsR7lxlVvXl.jpg',
+            desc: '店主诚意推荐 品质商品',
+            link: '/pagesUser/coupon/coupon',
+            title: '今日推荐',
+            btn_background: 'linear-gradient(90deg, #4bc4ff, #207eff 100%)'
+          },
+          {
+            img: 's3://2023/12/19/mHuHJBzlvllIdEgnycCLc0yRYUR1uoEWeEdcgCiG.jpg',
+            desc: '店主诚意推荐 品质商品',
+            link: '/pagesHome/sekilling/sekilling',
+            title: '热门榜单',
+            btn_background: 'linear-gradient(90deg,#ff9043,#ff531d 100%)'
+          },
+          {
+            img: null,
+            desc: '店主诚意推荐 品质商品',
+            link: '/pages/category/category?id=25',
+            title: '首发新品',
+            btn_background: 'linear-gradient(90deg,#96e187,#48ce2c 100%)'
+          },
+          {
+            img: null,
+            desc: '店主诚意推荐 品质商品',
+            link: null,
+            title: '促销单品',
+            btn_background: 'linear-gradient(90deg,#ffc560,#ff9c00 100%)'
+          }
+        ],
+        title: '促销标题',
+        marginTop: 0,
+        titleColor: '#F20A0A',
+        backgroundColor: '#ffe5e3',
+        tagBackgroundColor: '#EB1515'
+      },
+      name: 'Cube',
+      title: '活动魔方'
+    },
+    {
+      bind: {
+        icon: 's3://2023/12/13/F2UDv8VjF57Tt8vBkAy8LXRR08v9z0OEikLzMqPg.png'
+      },
+      name: 'Skill',
+      title: '秒杀'
+    },
+    {
+      bind: {
+        icon: 's3://2024/01/03/SC9EOrHcLSLAkO8aGrJSoW9UtiYqZMgvx0Ffaeka.png',
+        showBtn: true,
+        showPrice: true,
+        showTitle: true,
+        showNumber: true,
+        showGroupTag: true
+      },
+      name: 'Group',
+      title: '拼团'
+    },
+    {
+      bind: {
+        themeColor: '#FF0000'
+      },
+      name: 'Coupon',
+      title: '优惠券'
+    },
+    {
+      bind: {
+        height: 10,
+        backgroundColor: '#ffffff'
+      },
+      name: 'Blank',
+      title: '辅助空白'
+    },
+    {
+      bind: {
+        count: 4,
+        layout: 'list',
+        category: {
+          img: [
+            's3://2023/12/08/7QoWoYsu0qlMPqlcKmu6YENRYca7NHvuTZVQwRhc.jpg',
+            's3://2023/12/08/BBGwsXZoiAY9zwCJpCbczyMYWgxwCofZmJU8BHDv.jpg',
+            's3://2023/12/08/cf2PeelpbD0PRACGwkPKCQQvLYVrKjbyRxNkX0ET.jpg',
+            's3://2023/12/08/7DgdLZERbuFqrOty5SCxt7e68nNefpcLx578vBrB.jpg'
+          ],
+          categoryIds: [48, 47, 45, 44]
+        },
+        showName: true,
+        template: 'select',
+        marginTop: 0,
+        paddingLR: 0,
+        showPrice: true,
+        priceColor: '#ff0000',
+        contentRadius: true,
+        backgroundColor: '#ffffff',
+        backgroundRadius: false,
+        showOriginalPrice: true
+      },
+      name: 'GoodsList',
+      title: '商品列表'
+    },
+    {
+      bind: {
+        lists: [
+          {
+            text: '首页',
+            index: 0,
+            iconPath: 's3://2024/01/20/7mUblltZ97dBQa7OoafZrUscoCMLuAqiZnNN1wkm.png',
+            pagePath: 'pages/home/home',
+            selectedIconPath: 's3://2024/04/11/U9frQ8RgUID6kuvbkDFjviSVrNufwcefDru91Ea1.png'
+          },
+          {
+            text: '分类',
+            index: 1,
+            iconPath: 's3://2024/01/20/YGuUpxPc42ipADw8iJGSISVEbb1FNrmyUd94d4SQ.png',
+            pagePath: 'pages/category/category',
+            selectedIconPath: 's3://2024/01/20/rl6pZM2G6HonB1gIJQc4s5sPFiyz8r04T28KMDwb.png'
+          },
+          {
+            text: '购物车',
+            index: 2,
+            iconPath: 's3://2024/01/20/O9bHpOMjdAV1gRw1M0PLdYRHQoeJww3fH09ezwyC.png',
+            pagePath: 'pages/cart/cart',
+            selectedIconPath: 's3://2024/01/20/87NkpSTE4pXOydWOmzgVvxHoIElEfuX6jFzX0gjp.png'
+          },
+          {
+            text: '我的',
+            index: 3,
+            iconPath: 's3://2024/01/20/2rCOZoKs9IsydcyihaCmzDQMxSSRYI3ZUMmeAV7W.png',
+            pagePath: 'pages/user/user',
+            selectedIconPath: 's3://2024/01/20/UXuRyvoXrQL7kz0H8bmkRF9Oo55WWrS3rH0PM1AN.png'
+          }
+        ]
+      },
+      name: 'TabBar',
+      title: '底部标签栏'
+    },
+    {
+      bind: {
+        img: ['s3://2024/02/27/mIrCb3xO6F6DasHjJZPEXwXyE9lL5HLRntCT9EwK.png'],
+        marginTop: 15,
+        paddingLR: 10,
+        previewImg: ['s3://2024/01/23/vw4tp5y861rpPu7m94oPptfKWRTOuyLvJYaaAVs3.png']
+      },
+      name: 'Broadcast',
+      title: '直播'
+    },
+    {
+      bind: {
+        lists: [
+          {
+            text: '首页',
+            index: 0,
+            iconPath: 's3://2024/01/20/7mUblltZ97dBQa7OoafZrUscoCMLuAqiZnNN1wkm.png',
+            pagePath: 'pages/home/home',
+            selectedIconPath: 's3://2024/04/11/U9frQ8RgUID6kuvbkDFjviSVrNufwcefDru91Ea1.png'
+          },
+          {
+            text: '分类',
+            index: 1,
+            iconPath: 's3://2024/01/20/YGuUpxPc42ipADw8iJGSISVEbb1FNrmyUd94d4SQ.png',
+            pagePath: 'pages/category/category',
+            selectedIconPath: 's3://2024/04/11/WFP9NpCElBX2iLQIRqS8gAWhhLvgpoSZ20CEulMs.png'
+          },
+          {
+            text: '购物车',
+            index: 2,
+            iconPath: 's3://2024/01/20/O9bHpOMjdAV1gRw1M0PLdYRHQoeJww3fH09ezwyC.png',
+            pagePath: 'pages/cart/cart',
+            selectedIconPath: 's3://2024/04/11/IdmetcEdjLG4j3GwRJP0lgus7D9h9fdycKwYkG3t.png'
+          },
+          {
+            text: '我的',
+            index: 3,
+            iconPath: 's3://2024/01/20/2rCOZoKs9IsydcyihaCmzDQMxSSRYI3ZUMmeAV7W.png',
+            pagePath: 'pages/user/user',
+            selectedIconPath: 's3://2024/04/11/35V3HpRRArjFVKoKaOCXZNkHiv5Hlwkp3ZYoN5tY.png'
+          }
+        ]
+      },
+      name: 'TabBar',
+      title: '底部标签栏'
+    }
+  ],
+  created_at: '2023-11-14 11:51:21',
+  updated_at: '2024-04-11 15:23:01',
+  style: {
+    backgroundColor: null
+  }
+}
 // 获取已启用的数据模板
 const enableList = ref()
 const diyConfig = ref({
@@ -59,12 +363,12 @@ const pageFootStyle = ref<any>({
 })
 
 watch(
-  () => state.dataList,
+  () => dataList.value,
   async (val: any) => {
     if (val) {
       const id = await val.find((item: any) => item.enabled).id
       // 获取启用的模板详情
-      enableList.value = await getDetail(id)
+      enableList.value = JSON.parse(JSON.stringify(detailList))
       nextTick(() => {
         diyConfig.value = {
           name: enableList.value.name,
@@ -74,6 +378,9 @@ watch(
         }
       })
     }
+  },
+  {
+    immediate: true
   }
 )
 
@@ -89,23 +396,9 @@ const toDesign = () => {
 
 // 编辑
 const Edit = (id: any) => {
-  getDetail(id).then(() => {
-    const urls: any = router.resolve(`/decoration/homeDesign/?id=${id}`)
-    // {
-    //   path: '/decoration/homeDesign',
-    //     query: {
-    //   data: JSON.stringify(state.detailData)
-    // }
-    // }
-    window.open(urls.href)
-  })
+  const urls: any = router.resolve(`/decoration/homeDesign/?id=${id}`)
+  window.open(urls.href)
 }
-
-// onMounted(() => {
-//   nextTick(() => {
-//     getEnabled()
-//   })
-// })
 </script>
 <script lang="ts">
 import Banner from '@/components/decoration/banner/index.vue'
@@ -214,7 +507,7 @@ export default {
       </div>
       <!-- 表格 -->
       <el-table
-        :data="state.dataList"
+        :data="dataList"
         :header-cell-style="{
           'text-align': 'center',
           'background-color': '#F1F1F1',
