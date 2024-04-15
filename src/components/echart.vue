@@ -4,7 +4,9 @@ import echarts from '@/utils/echarts'
 
 const props = defineProps<{
   order: any
+  height: string
 }>()
+const chartHeight = ref(props.height + 'px')
 const chart = ref()
 const chartCard = ref()
 let myChart: any = null
@@ -51,6 +53,6 @@ watch(
 
 <style scoped lang="scss">
 .chart_box {
-  height: 280px;
+  height: v-bind(chartHeight);
 }
 </style>

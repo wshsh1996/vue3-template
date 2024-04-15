@@ -440,7 +440,11 @@ const toggleDate = async (num: any, type: any) => {
           <h4 class="cost_times_name">消费次数分析</h4>
         </div>
         <div class="cost_times_echarts">
-          <echarts v-if="orderCustomCount.series[0].data.length > 0" :order="orderCustomCount" />
+          <echarts
+            v-if="orderCustomCount.series[0].data.length > 0"
+            height="280"
+            :order="orderCustomCount"
+          />
           <el-empty v-else></el-empty>
         </div>
       </div>
@@ -449,7 +453,11 @@ const toggleDate = async (num: any, type: any) => {
           <h4 class="sale_rate_name">商品分类销售占比</h4>
         </div>
         <div class="sale_rate_echarts">
-          <echarts v-if="orderCategoryInfo.series[0].data.length > 0" :order="orderCategoryInfo" />
+          <echarts
+            v-if="orderCategoryInfo.series[0].data.length > 0"
+            height="280"
+            :order="orderCategoryInfo"
+          />
           <el-empty v-else></el-empty>
         </div>
       </div>
@@ -459,7 +467,11 @@ const toggleDate = async (num: any, type: any) => {
         </div>
 
         <div class="add_user_echarts">
-          <echarts v-if="orderAddUser.series[0].data.length > 0" :order="orderAddUser" />
+          <echarts
+            v-if="orderAddUser.series[0].data.length > 0"
+            height="280"
+            :order="orderAddUser"
+          />
           <el-empty v-else></el-empty>
         </div>
       </div>
@@ -491,7 +503,11 @@ const toggleDate = async (num: any, type: any) => {
           </div>
         </div>
         <div class="sale_trend_echarts">
-          <echarts v-if="orderSalesData.series[0].data.length > 0" :order="orderSalesData" />
+          <echarts
+            v-if="orderSalesData.series[0].data.length > 0"
+            height="280"
+            :order="orderSalesData"
+          />
           <el-empty v-else></el-empty>
         </div>
       </div>

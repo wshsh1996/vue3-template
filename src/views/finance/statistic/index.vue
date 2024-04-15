@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Echarts from '@/views/home/echart.vue'
+import Echarts from '@/components/echart.vue'
 import { ref } from 'vue'
 import { CaretTop, CaretBottom, Warning } from '@element-plus/icons-vue'
 
@@ -378,7 +378,7 @@ const orderDataEcharts = ref<any>({
         </div>
         <div class="cost_times_echarts">
           <div class="price">￥3151543.12</div>
-          <echarts :height="260" v-if="orderPrice" :order="orderPrice" />
+          <echarts height="220" v-if="orderPrice" :order="orderPrice" />
         </div>
       </div>
       <!--   今日订单数   -->
@@ -402,7 +402,7 @@ const orderDataEcharts = ref<any>({
               </div>
             </div>
           </div>
-          <echarts :height="120" v-if="orderCount" :order="orderCount" />
+          <echarts height="120" v-if="orderCount" :order="orderCount" />
           <div class="bottom_static">
             <div class="order_box">
               <div class="order_des">本月订单数</div>
@@ -440,7 +440,7 @@ const orderDataEcharts = ref<any>({
               </div>
             </div>
           </div>
-          <echarts :height="120" v-if="orderPay" :order="orderPay" />
+          <echarts height="120" v-if="orderPay" :order="orderPay" />
           <div class="bottom_static">
             <div class="order_box">
               <div class="order_des">本月支付人数</div>
@@ -505,7 +505,7 @@ const orderDataEcharts = ref<any>({
               <div class="item_icon"></div>
             </div>
           </div>
-          <echarts :height="500" v-if="orderDataEcharts" :order="orderDataEcharts" />
+          <echarts height="500" v-if="orderDataEcharts" :order="orderDataEcharts" />
         </div>
       </div>
     </div>
@@ -513,9 +513,6 @@ const orderDataEcharts = ref<any>({
 </template>
 
 <style lang="scss" scoped>
-* {
-  box-sizing: border-box;
-}
 .home_container {
   width: 100%;
   height: 100%;
@@ -526,10 +523,9 @@ const orderDataEcharts = ref<any>({
 .two_row {
   margin-bottom: 15px;
   display: flex;
-  //justify-content: space-between;
+  justify-content: space-between;
   .cost_times {
-    margin-right: 25px;
-    width: 691px;
+    width: 41.6%;
     height: 360px;
     .header {
       margin-bottom: 15px;
@@ -543,7 +539,6 @@ const orderDataEcharts = ref<any>({
 
     .cost_times_echarts {
       padding: 0 20px;
-      width: 691px;
       height: 320px;
       border-radius: 5px;
       background-color: #fff;
@@ -556,14 +551,12 @@ const orderDataEcharts = ref<any>({
     }
   }
   .sale_rate {
-    margin-right: 25px;
-    width: 476px;
+    width: 28.6%;
     height: 360px;
     .header {
       margin-bottom: 15px;
       display: flex;
       align-items: center;
-
       .sale_rate_name {
         padding-left: 15px;
         font-size: 15px;
@@ -574,7 +567,6 @@ const orderDataEcharts = ref<any>({
       flex-direction: column;
       justify-content: space-between;
       padding: 20px 20px;
-      width: 476px;
       height: 320px;
       border-radius: 5px;
       background-color: #fff;
@@ -611,19 +603,23 @@ const orderDataEcharts = ref<any>({
       }
     }
   }
+  .sale_rate:last-child {
+    margin-right: 0;
+  }
 }
 
 // 第san行
 .four_row {
-  width: 1690px;
+  width: 1660px;
   // 销售数据趋势
   .sale_trend {
-    width: 1690px;
+    width: 100%;
     .sale_trend_header {
       padding-bottom: 15px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      width: 100%;
       font-size: 15px;
       .header {
         display: flex;

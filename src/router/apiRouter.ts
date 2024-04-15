@@ -23,37 +23,6 @@ const apiRouter: IMenu[] = [
     ]
   },
   {
-    path: '/order',
-    name: 'order',
-    component: '/order/orderManage/index',
-    meta: {
-      title: '订单管理',
-      icon: 'order',
-      permission: ['order']
-    }
-  },
-  {
-    path: '/marketing',
-    name: 'marketing',
-    redirect: '/marketing',
-    meta: {
-      title: '营销',
-      icon: 'marketing',
-      permission: ['marketing']
-    },
-    children: [
-      {
-        path: '/marketing/credit',
-        name: 'credit',
-        component: '/marketing/creditsManage/creditsGoods/index',
-        meta: {
-          title: '积分商品',
-          permission: ['credit']
-        }
-      }
-    ]
-  },
-  {
     path: '/finance',
     name: 'finance',
     redirect: '/finance/cashApply',
