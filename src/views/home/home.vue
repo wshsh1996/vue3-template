@@ -366,72 +366,85 @@ const toggleDate = async (num: any, type: any) => {
 <template>
   <div class="home_container">
     <!-- 今日数据概览 -->
+
     <div class="today_overview" v-if="data">
       <div class="header">
         <h4 class="title">今日数据概览</h4>
       </div>
-      <div class="overview_content">
-        <div class="card_box">
-          <div class="card_info">
-            <p class="name">订单金额</p>
-            <NumberAnimation
-              :to="Number(data.order_amount)"
-              separator=""
-              :value-style="{ fontSize: '24px', fontWeight: 'bold', color: '#333' }"
-            ></NumberAnimation>
-            <span class="price">元</span>
+      <el-row class="overview_content" :gutter="10">
+        <!--      <div class="overview_content">-->
+        <el-col class="today_overview_col" :xs="24" :sm="12" :md="8" :lg="5" :xl="5">
+          <div class="card_box">
+            <div class="card_info">
+              <p class="name">订单金额</p>
+              <NumberAnimation
+                :to="Number(data.order_amount)"
+                separator=""
+                :value-style="{ fontSize: '24px', fontWeight: 'bold', color: '#333' }"
+              ></NumberAnimation>
+              <span class="price">元</span>
+            </div>
+            <img src="@/assets/home/header_order_price.png" alt="" />
           </div>
-          <img src="@/assets/home/header_order_price.png" alt="" />
-        </div>
-        <div class="card_box">
-          <div class="card_info">
-            <p class="name">订单数</p>
-            <NumberAnimation
-              :to="Number(data.order_count)"
-              separator=""
-              :value-style="{ fontSize: '24px', fontWeight: 'bold', color: '#333' }"
-            ></NumberAnimation>
-            <span class="price">个</span>
+        </el-col>
+        <el-col class="today_overview_col" :xs="24" :sm="12" :md="8" :lg="5" :xl="5">
+          <div class="card_box">
+            <div class="card_info">
+              <p class="name">订单数</p>
+              <NumberAnimation
+                :to="Number(data.order_count)"
+                separator=""
+                :value-style="{ fontSize: '24px', fontWeight: 'bold', color: '#333' }"
+              ></NumberAnimation>
+              <span class="price">个</span>
+            </div>
+            <img src="@/assets/home/header_order_num.png" alt="" />
           </div>
-          <img src="@/assets/home/header_order_num.png" alt="" />
-        </div>
-        <div class="card_box">
-          <div class="card_info">
-            <p class="name">退款金额</p>
-            <NumberAnimation
-              :to="Number(data.after_sale_amount)"
-              separator=""
-              :value-style="{ fontSize: '24px', fontWeight: 'bold', color: '#333' }"
-            ></NumberAnimation>
-            <span class="price">元</span>
+        </el-col>
+        <el-col class="today_overview_col" :xs="24" :sm="12" :md="8" :lg="5" :xl="5">
+          <div class="card_box">
+            <div class="card_info">
+              <p class="name">退款金额</p>
+              <NumberAnimation
+                :to="Number(data.after_sale_amount)"
+                separator=""
+                :value-style="{ fontSize: '24px', fontWeight: 'bold', color: '#333' }"
+              ></NumberAnimation>
+              <span class="price">元</span>
+            </div>
+            <img src="@/assets/home/header_refund_price.png" alt="" />
           </div>
-          <img src="@/assets/home/header_refund_price.png" alt="" />
-        </div>
-        <div class="card_box">
-          <div class="card_info">
-            <p class="name">退款数</p>
-            <NumberAnimation
-              :to="Number(data.after_sale_count)"
-              separator=""
-              :value-style="{ fontSize: '24px', fontWeight: 'bold', color: '#333' }"
-            ></NumberAnimation>
-            <span class="price">个</span>
+        </el-col>
+        <el-col class="today_overview_col" :xs="24" :sm="12" :md="12" :lg="5" :xl="5">
+          <div class="card_box">
+            <div class="card_info">
+              <p class="name">退款数</p>
+              <NumberAnimation
+                :to="Number(data.after_sale_count)"
+                separator=""
+                :value-style="{ fontSize: '24px', fontWeight: 'bold', color: '#333' }"
+              ></NumberAnimation>
+              <span class="price">个</span>
+            </div>
+            <img src="@/assets/home/header_refund_num.png" alt="" />
           </div>
-          <img src="@/assets/home/header_refund_num.png" alt="" />
-        </div>
-        <div class="card_box">
-          <div class="card_info">
-            <p class="name">新增用户</p>
-            <NumberAnimation
-              :to="Number(data.today_user_count)"
-              separator=""
-              :value-style="{ fontSize: '24px', fontWeight: 'bold', color: '#333' }"
-            ></NumberAnimation>
-            <span class="price">个</span>
+        </el-col>
+        <el-col class="today_overview_col" :xs="24" :sm="12" :md="12" :lg="5" :xl="5">
+          <div class="card_box">
+            <div class="card_info">
+              <p class="name">新增用户</p>
+              <NumberAnimation
+                :to="Number(data.today_user_count)"
+                separator=""
+                :value-style="{ fontSize: '24px', fontWeight: 'bold', color: '#333' }"
+              ></NumberAnimation>
+              <span class="price">个</span>
+            </div>
+            <img src="@/assets/home/header_add_user.png" alt="" />
           </div>
-          <img src="@/assets/home/header_add_user.png" alt="" />
-        </div>
-      </div>
+        </el-col>
+        <!--      </div>-->
+      </el-row>
     </div>
     <!-- two_row -->
     <div class="two_row">
@@ -574,20 +587,19 @@ const toggleDate = async (num: any, type: any) => {
     justify-content: space-between;
     width: 100%;
     .card_box {
-      padding: 28px 24px 28px 28px;
+      padding: 24px;
+      flex: 1;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      width: 19.5%;
       height: 123px;
       border-radius: 5px;
       background-color: #fff;
       .card_info {
-        margin-right: 95px;
-        width: 123px;
         height: 66px;
         .name {
           margin-bottom: 10px;
-          width: 68px;
+          //width: 68px;
           height: 20px;
           font-size: 16px;
           color: #999999;
@@ -610,6 +622,12 @@ const toggleDate = async (num: any, type: any) => {
     }
   }
 }
+.today_overview_col {
+  margin-bottom: 10px;
+}
+//.el-col-xl-5 {
+//  max-width: 20%;
+//}
 
 // 第二行
 .two_row {
@@ -777,5 +795,11 @@ const toggleDate = async (num: any, type: any) => {
 .table_style {
   width: 100%;
   height: 100%;
+}
+
+@media only screen and (min-width: 1200px) {
+  .el-col-lg-5 {
+    max-width: 20%;
+  }
 }
 </style>
