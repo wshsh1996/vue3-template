@@ -4,12 +4,15 @@ import router from '@/router'
 import PageFoot from '@/views/decoration/homeDesign/components/pageFoot.vue'
 import { ElMessage } from 'element-plus'
 import { ref, watch, nextTick } from 'vue'
+import { useWindowSize } from '@vueuse/core'
 
 const { state, useMode, getDetail } = useCurd({
   url: '/admin/diy',
   openPage: false,
   autoInit: false
 })
+
+const { width: windowWidth } = useWindowSize()
 // 获取table数据模板
 const dataList = ref([
   {
@@ -468,108 +471,114 @@ export default {
     <div class="header-right">
       <el-button type="primary" @click="toDesign">添加模板</el-button>
     </div>
-    <div class="main">
+    <el-row :gutter="10">
       <!--  启用模板  -->
-      <div class="wrapper-con" v-if="diyConfig.components.length">
-        <div class="content">
-          <div
-            class="con_txt"
-            style="display: flex; flex-direction: column; overflow: hidden; height: 100%"
-          >
-            <div class="over_flowy">
-              <div class="picture">
-                <img src="../../../assets/electric.png" alt="" />
+      <el-col
+        :style="{ marginBottom: windowWidth < 1200 ? '40px' : '0' }"
+        class="center"
+        :xs="24"
+        :sm="24"
+        :md="24"
+        :lg="10"
+        :xl="10"
+      >
+        <div class="wrapper-con" v-if="diyConfig.components.length">
+          <div class="content">
+            <div
+              class="con_txt"
+              style="display: flex; flex-direction: column; overflow: hidden; height: 100%"
+            >
+              <div class="over_flowy">
+                <div class="picture">
+                  <img src="../../../assets/electric.png" alt="" />
+                </div>
+                <div class="page-title">{{ diyConfig.title }}</div>
               </div>
-              <div class="page-title">{{ diyConfig.title }}</div>
-            </div>
-            <div class="scrollCon">
-              <div style="margin: 0 auto">
-                <div
-                  v-if="diyConfig.components"
-                  class="scroll-box"
-                  :style="'background-color:' + diyConfig.style.backgroundColor"
-                >
-                  <div v-for="(item, index) in diyConfig.components" :key="index" class="group">
-                    <component :is="item.name" v-bind="item.bind"></component>
+              <div class="scrollCon">
+                <div style="margin: 0 auto">
+                  <div
+                    v-if="diyConfig.components"
+                    class="scroll-box"
+                    :style="'background-color:' + diyConfig.style.backgroundColor"
+                  >
+                    <div v-for="(item, index) in diyConfig.components" :key="index" class="group">
+                      <component :is="item.name" v-bind="item.bind"></component>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="footer">
-              <div class="page-foot">
-                <div class="group">
-                  <page-foot v-bind:tabBar="pageFootStyle.bind"></page-foot>
+              <div class="footer">
+                <div class="page-foot">
+                  <div class="group">
+                    <page-foot v-bind:tabBar="pageFootStyle.bind"></page-foot>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </el-col>
       <!-- 表格 -->
-      <el-table
-        :data="dataList"
-        :header-cell-style="{
-          'text-align': 'center',
-          'background-color': '#F1F1F1',
-          height: '50px',
-          color: '#333'
-        }"
-        :cell-style="{ padding: '0', 'text-align': 'center', height: '50px', color: '#333' }"
-        v-loading="state.listLoading"
-        :row-key="state.primaryKey"
-      >
-        <el-table-column prop="id" label="ID" width="100"></el-table-column>
-        <el-table-column prop="name" label="模板名称"> </el-table-column>
-        <el-table-column prop="title" label="页面标题"> </el-table-column>
-        <el-table-column prop="updated_at" label="最近更新时间"> </el-table-column>
-        <el-table-column prop="enabled" label="状态">
-          <template #default="{ row }">
-            <el-tag type="success" v-if="row.enabled">已启用</el-tag>
-            <el-tag type="warning" v-else>未启用</el-tag>
+      <el-col :xs="24" :sm="24" :md="24" :lg="14" :xl="14">
+        <el-table
+          :data="dataList"
+          :header-cell-style="{
+            'text-align': 'center',
+            'background-color': '#F1F1F1',
+            height: '50px',
+            color: '#333'
+          }"
+          :cell-style="{ padding: '0', 'text-align': 'center', height: '50px', color: '#333' }"
+          v-loading="state.listLoading"
+          :row-key="state.primaryKey"
+        >
+          <el-table-column prop="id" label="ID" width="100"></el-table-column>
+          <el-table-column prop="name" label="模板名称"> </el-table-column>
+          <el-table-column prop="title" label="页面标题"> </el-table-column>
+          <el-table-column prop="updated_at" label="最近更新时间"> </el-table-column>
+          <el-table-column prop="enabled" label="状态">
+            <template #default="{ row }">
+              <el-tag type="success" v-if="row.enabled">已启用</el-tag>
+              <el-tag type="warning" v-else>未启用</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column prop="" label="操作" fixed="right">
+            <template #default="{ row }">
+              <el-button type="primary" link @click="Edit(row.id)">编辑</el-button>
+              <el-button type="primary" :disabled="row.enabled" link @click="useMode(row.id)"
+                >启用模板</el-button
+              >
+            </template>
+          </el-table-column>
+          <template #empty>
+            <el-empty></el-empty>
           </template>
-        </el-table-column>
-        <el-table-column prop="" label="操作" fixed="right">
-          <template #default="{ row }">
-            <el-button type="primary" link @click="Edit(row.id)">编辑</el-button>
-            <el-button type="primary" :disabled="row.enabled" link @click="useMode(row.id)"
-              >启用模板</el-button
-            >
-          </template>
-        </el-table-column>
-        <template #empty>
-          <el-empty></el-empty>
-        </template>
-      </el-table>
-    </div>
+        </el-table>
+      </el-col>
+    </el-row>
   </el-card>
 </template>
 
 <style scoped lang="scss">
 .header {
   height: 760px;
+  overflow-y: scroll;
 }
 .header-right {
   margin-bottom: 20px;
 }
-//.header {
-//  display: flex;
-//  justify-content: space-between;
-//  .header-left {
-//    flex: 1;
-//  }
-//}
+
 :deep(.el-form) {
   margin-bottom: 15px;
 }
-.main {
+.center {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
 }
 
 // 模板
 .wrapper-con {
-  margin-right: 30px;
-  flex: 1;
   display: flex;
   justify-content: center;
   width: 400px;
