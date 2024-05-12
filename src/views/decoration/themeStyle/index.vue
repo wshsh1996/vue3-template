@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { ElMessage } from 'element-plus'
+import { useWindowSize } from '@vueuse/core'
 
+const { width: windowWidth } = useWindowSize()
 // 按钮当前选中状态
 const activeColor = ref<any>('')
 const theme_color = ref('#FF4B40')
@@ -31,11 +33,19 @@ onMounted(() => {
   <el-card>
     <div class="color-box">
       <div class="color-select">
-        <el-row :gutter="20">
-          <el-col :span="2" style="margin-top: 10px">
+        <el-row :gutter="10">
+          <el-col
+            :style="{ marginBottom: windowWidth < 1200 ? '10px' : '0' }"
+            :xs="24"
+            :sm="24"
+            :md="24"
+            :lg="3"
+            :xl="3"
+            style="margin-top: 10px"
+          >
             <div>选择配色方案:</div>
           </el-col>
-          <el-col :span="2">
+          <el-col :xs="12" :sm="6" :md="4_4" :lg="3" :xl="3">
             <el-button
               :class="{ active: activeColor === '#32b7de' }"
               size="large"
@@ -45,7 +55,7 @@ onMounted(() => {
               <span>天空蓝</span>
             </el-button>
           </el-col>
-          <el-col :span="2">
+          <el-col :xs="12" :sm="6" :md="4_4" :lg="3" :xl="3">
             <el-button
               size="large"
               :class="{ active: activeColor === '#42ca4d' }"
@@ -55,7 +65,7 @@ onMounted(() => {
               <span>生鲜绿</span>
             </el-button>
           </el-col>
-          <el-col :span="2">
+          <el-col :xs="12" :sm="6" :md="4_4" :lg="3" :xl="3">
             <el-button
               size="large"
               :class="{ active: activeColor === '#e93323' }"
@@ -65,7 +75,7 @@ onMounted(() => {
               <span>热情红</span>
             </el-button>
           </el-col>
-          <el-col :span="2">
+          <el-col :xs="12" :sm="6" :md="4_4" :lg="3" :xl="3">
             <el-button
               size="large"
               :class="{ active: activeColor === '#ff448f' }"
@@ -75,7 +85,7 @@ onMounted(() => {
               <span>魅力粉</span>
             </el-button>
           </el-col>
-          <el-col :span="2">
+          <el-col :xs="12" :sm="6" :md="4_4" :lg="3" :xl="3">
             <el-button
               size="large"
               :class="{ active: activeColor === '#FF6600' }"
@@ -85,7 +95,7 @@ onMounted(() => {
               <span>活力橙</span>
             </el-button>
           </el-col>
-          <el-col :span="2">
+          <el-col :xs="12" :sm="6" :md="4_4" :lg="3" :xl="3">
             <el-button
               size="large"
               :class="{ active: activeColor === '#e0a558' }"
@@ -95,7 +105,7 @@ onMounted(() => {
               <span>高端金</span>
             </el-button>
           </el-col>
-          <el-col :span="2">
+          <el-col :xs="12" :sm="6" :md="4_4" :lg="3" :xl="3">
             <el-button
               size="large"
               :class="{ active: activeColor === '#FF4B40' }"
@@ -226,5 +236,11 @@ onMounted(() => {
 .img_size {
   margin-right: 30px;
   width: 240px;
+}
+
+@media only screen and (min-width: 1200px) {
+  .el-col-lg-4_4 {
+    max-width: 14.2%;
+  }
 }
 </style>
