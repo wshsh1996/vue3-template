@@ -4,7 +4,9 @@ import { ref } from 'vue'
 import type { dataType, pieType, turnOverType } from '@/models/home'
 import InitDialog from '@/views/home/initDialog.vue'
 import NumberAnimation from '@/components/NumberAnimation.vue'
+import { useWindowSize } from '@vueuse/core'
 
+const { width: windowWidth } = useWindowSize()
 // 创建数据概览数据
 const data = ref<dataType>({
   order_amount: 2000,
@@ -372,8 +374,16 @@ const toggleDate = async (num: any, type: any) => {
         <h4 class="title">今日数据概览</h4>
       </div>
       <el-row class="overview_content" :gutter="10">
-        <!--      <div class="overview_content">-->
-        <el-col class="today_overview_col" :xs="24" :sm="12" :md="8" :lg="5" :xl="5">
+        <el-col
+          :style="{
+            marginBottom: windowWidth >= 1200 ? '0' : '10px'
+          }"
+          :xs="24"
+          :sm="12"
+          :md="8"
+          :lg="5"
+          :xl="5"
+        >
           <div class="card_box">
             <div class="card_info">
               <p class="name">订单金额</p>
@@ -387,7 +397,16 @@ const toggleDate = async (num: any, type: any) => {
             <img src="@/assets/home/header_order_price.png" alt="" />
           </div>
         </el-col>
-        <el-col class="today_overview_col" :xs="24" :sm="12" :md="8" :lg="5" :xl="5">
+        <el-col
+          :style="{
+            marginBottom: windowWidth >= 1200 ? '0' : '10px'
+          }"
+          :xs="24"
+          :sm="12"
+          :md="8"
+          :lg="5"
+          :xl="5"
+        >
           <div class="card_box">
             <div class="card_info">
               <p class="name">订单数</p>
@@ -401,7 +420,16 @@ const toggleDate = async (num: any, type: any) => {
             <img src="@/assets/home/header_order_num.png" alt="" />
           </div>
         </el-col>
-        <el-col class="today_overview_col" :xs="24" :sm="12" :md="8" :lg="5" :xl="5">
+        <el-col
+          :style="{
+            marginBottom: windowWidth >= 1200 ? '0' : '10px'
+          }"
+          :xs="24"
+          :sm="12"
+          :md="8"
+          :lg="5"
+          :xl="5"
+        >
           <div class="card_box">
             <div class="card_info">
               <p class="name">退款金额</p>
@@ -415,7 +443,16 @@ const toggleDate = async (num: any, type: any) => {
             <img src="@/assets/home/header_refund_price.png" alt="" />
           </div>
         </el-col>
-        <el-col class="today_overview_col" :xs="24" :sm="12" :md="12" :lg="5" :xl="5">
+        <el-col
+          :style="{
+            marginBottom: windowWidth >= 992 ? '0' : '10px'
+          }"
+          :xs="24"
+          :sm="12"
+          :md="12"
+          :lg="5"
+          :xl="5"
+        >
           <div class="card_box">
             <div class="card_info">
               <p class="name">退款数</p>
@@ -429,7 +466,7 @@ const toggleDate = async (num: any, type: any) => {
             <img src="@/assets/home/header_refund_num.png" alt="" />
           </div>
         </el-col>
-        <el-col class="today_overview_col" :xs="24" :sm="12" :md="12" :lg="5" :xl="5">
+        <el-col :xs="24" :sm="12" :md="12" :lg="5" :xl="5">
           <div class="card_box">
             <div class="card_info">
               <p class="name">新增用户</p>
@@ -443,113 +480,149 @@ const toggleDate = async (num: any, type: any) => {
             <img src="@/assets/home/header_add_user.png" alt="" />
           </div>
         </el-col>
-        <!--      </div>-->
       </el-row>
     </div>
     <!-- two_row -->
-    <div class="two_row">
-      <div class="cost_times">
-        <div class="header">
-          <h4 class="cost_times_name">消费次数分析</h4>
+    <el-row class="row_margin_bottom" :gutter="10">
+      <el-col
+        :style="{
+          marginBottom: windowWidth >= 1200 ? '0' : '20px'
+        }"
+        :xs="24"
+        :sm="24"
+        :md="12"
+        :lg="8"
+        :xl="8"
+      >
+        <div class="cost_times">
+          <div class="header">
+            <h4 class="cost_times_name">消费次数分析</h4>
+          </div>
+          <div class="cost_times_echarts">
+            <echarts
+              v-if="orderCustomCount.series[0].data.length > 0"
+              height="280"
+              :order="orderCustomCount"
+            />
+            <el-empty v-else></el-empty>
+          </div>
         </div>
-        <div class="cost_times_echarts">
-          <echarts
-            v-if="orderCustomCount.series[0].data.length > 0"
-            height="280"
-            :order="orderCustomCount"
-          />
-          <el-empty v-else></el-empty>
+      </el-col>
+      <el-col
+        :style="{
+          marginBottom: windowWidth >= 1200 ? '0' : '20px'
+        }"
+        :xs="24"
+        :sm="24"
+        :md="12"
+        :lg="8"
+        :xl="8"
+      >
+        <div class="sale_rate">
+          <div class="header">
+            <h4 class="sale_rate_name">商品分类销售占比</h4>
+          </div>
+          <div class="sale_rate_echarts">
+            <echarts
+              v-if="orderCategoryInfo.series[0].data.length > 0"
+              height="280"
+              :order="orderCategoryInfo"
+            />
+            <el-empty v-else></el-empty>
+          </div>
         </div>
-      </div>
-      <div class="sale_rate">
-        <div class="header">
-          <h4 class="sale_rate_name">商品分类销售占比</h4>
-        </div>
-        <div class="sale_rate_echarts">
-          <echarts
-            v-if="orderCategoryInfo.series[0].data.length > 0"
-            height="280"
-            :order="orderCategoryInfo"
-          />
-          <el-empty v-else></el-empty>
-        </div>
-      </div>
-      <div class="add_user">
-        <div class="header">
-          <h4 class="add_user_name">新增用户趋势</h4>
-        </div>
+      </el-col>
+      <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
+        <div class="add_user">
+          <div class="header">
+            <h4 class="add_user_name">新增用户趋势</h4>
+          </div>
 
-        <div class="add_user_echarts">
-          <echarts
-            v-if="orderAddUser.series[0].data.length > 0"
-            height="280"
-            :order="orderAddUser"
-          />
-          <el-empty v-else></el-empty>
+          <div class="add_user_echarts">
+            <echarts
+              v-if="orderAddUser.series[0].data.length > 0"
+              height="280"
+              :order="orderAddUser"
+            />
+            <el-empty v-else></el-empty>
+          </div>
         </div>
-      </div>
-    </div>
+      </el-col>
+    </el-row>
 
     <!--  three_row  -->
-    <div class="four_row">
-      <!-- 销售数据趋势 -->
-      <div class="sale_trend">
-        <div class="sale_trend_header">
+    <el-row :gutter="10">
+      <el-col
+        :style="{
+          marginBottom: windowWidth >= 1200 ? '0' : '20px'
+        }"
+        :xs="24"
+        :sm="24"
+        :md="12"
+        :lg="12"
+        :xl="12"
+      >
+        <!-- 销售数据趋势 -->
+        <div class="sale_trend">
+          <div class="sale_trend_header">
+            <div class="header">
+              <h4 class="sale_trend_name">销售数据趋势</h4>
+            </div>
+            <div class="sale_trend_date">
+              <el-tabs>
+                <el-button
+                  style="border-radius: 40px"
+                  @click="toggleDate(1, 'day')"
+                  :type="dateNum === 1 ? 'primary' : ''"
+                  >近30日</el-button
+                >
+                <el-button
+                  style="border-radius: 40px"
+                  @click="toggleDate(2, 'year')"
+                  :type="dateNum === 2 ? 'primary' : ''"
+                  >近1年</el-button
+                >
+              </el-tabs>
+            </div>
+          </div>
+          <div class="sale_trend_echarts">
+            <echarts
+              v-if="orderSalesData.series[0].data.length > 0"
+              height="280"
+              :order="orderSalesData"
+            />
+            <el-empty v-else></el-empty>
+          </div>
+        </div>
+      </el-col>
+      <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+        <div class="sale_rank">
           <div class="header">
-            <h4 class="sale_trend_name">销售数据趋势</h4>
+            <h4 class="sale_rank_name">商品销售排行榜</h4>
           </div>
-          <div class="sale_trend_date">
-            <el-tabs>
-              <el-button
-                style="border-radius: 40px"
-                @click="toggleDate(1, 'day')"
-                :type="dateNum === 1 ? 'primary' : ''"
-                >近30日</el-button
-              >
-              <el-button
-                style="border-radius: 40px"
-                @click="toggleDate(2, 'year')"
-                :type="dateNum === 2 ? 'primary' : ''"
-                >近1年</el-button
-              >
-            </el-tabs>
-          </div>
-        </div>
-        <div class="sale_trend_echarts">
-          <echarts
-            v-if="orderSalesData.series[0].data.length > 0"
-            height="280"
-            :order="orderSalesData"
-          />
-          <el-empty v-else></el-empty>
-        </div>
-      </div>
-      <div class="sale_rank">
-        <div class="header">
-          <h4 class="sale_rank_name">商品销售排行榜</h4>
-        </div>
-        <div class="sale_rank_echarts">
-          <el-table
-            :data="goodsRank"
-            class="table_style"
-            :cell-style="{ textAlign: 'center' }"
-            :header-cell-style="{ textAlign: 'center' }"
-            show-overflow-tooltip
-          >
-            <el-table-column prop="title" label="商品名称">
-              <template #default="{ row }">
-                <el-text truncated>{{ row.title }}</el-text>
+          <div class="sale_rank_echarts">
+            <el-table
+              :data="goodsRank"
+              class="table_style"
+              :cell-style="{ textAlign: 'center' }"
+              :header-cell-style="{ textAlign: 'center' }"
+              show-overflow-tooltip
+            >
+              <el-table-column prop="title" label="商品名称">
+                <template #default="{ row }">
+                  <el-text truncated>{{ row.title }}</el-text>
+                </template>
+              </el-table-column>
+              <el-table-column prop="sales_amount" label="销售额（元）"></el-table-column>
+              <el-table-column prop="sales" label="销量"></el-table-column>
+              <template #empty>
+                <el-empty></el-empty>
               </template>
-            </el-table-column>
-            <el-table-column prop="sales_amount" label="销售额（元）"></el-table-column>
-            <el-table-column prop="sales" label="销量"></el-table-column>
-            <template #empty>
-              <el-empty></el-empty>
-            </template>
-          </el-table>
+            </el-table>
+          </div>
         </div>
-      </div>
-    </div>
+      </el-col>
+    </el-row>
   </div>
   <init-dialog></init-dialog>
 </template>
@@ -622,151 +695,108 @@ const toggleDate = async (num: any, type: any) => {
     }
   }
 }
+.row_margin_bottom {
+  margin-bottom: 20px;
+}
 .today_overview_col {
   margin-bottom: 10px;
 }
-//.el-col-xl-5 {
-//  max-width: 20%;
-//}
 
 // 第二行
-.two_row {
-  margin-bottom: 15px;
-  display: flex;
-  justify-content: space-between;
-
-  .cost_times {
-    width: 30%;
-
-    .header {
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      .cost_times_name {
-        padding-left: 15px;
-        font-size: 15px;
-      }
-      .cost_times_name::before {
-        content: '';
-        display: inline-block;
-        width: 5px;
-        height: 14px;
-        background-color: #2682f8;
-        margin-right: 10px;
-      }
+.cost_times {
+  .header {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    .cost_times_name {
+      padding-left: 15px;
+      font-size: 15px;
     }
-
-    .cost_times_echarts {
-      width: 100%;
-      height: 280px;
-      border-radius: 5px;
-      background-color: #fff;
+    .cost_times_name::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 14px;
+      background-color: #2682f8;
+      margin-right: 10px;
     }
   }
-  .sale_rate {
-    width: 28.6%;
-    .header {
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      .sale_rate_name {
-        padding-left: 15px;
-        font-size: 15px;
-      }
-      .sale_rate_name::before {
-        content: '';
-        display: inline-block;
-        width: 5px;
-        height: 14px;
-        background-color: #2682f8;
-        margin-right: 10px;
-      }
+
+  .cost_times_echarts {
+    width: 100%;
+    height: 280px;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+}
+.sale_rate {
+  .header {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    .sale_rate_name {
+      padding-left: 15px;
+      font-size: 15px;
     }
-    .sale_rate_echarts {
-      width: 100%;
-      height: 280px;
-      border-radius: 5px;
-      background-color: #fff;
+    .sale_rate_name::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 14px;
+      background-color: #2682f8;
+      margin-right: 10px;
     }
   }
-  .add_user {
-    width: 40%;
-    .header {
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      .add_user_name {
-        padding-left: 15px;
-        font-size: 15px;
-      }
-      .add_user_name::before {
-        content: '';
-        display: inline-block;
-        width: 5px;
-        height: 14px;
-        background-color: #2682f8;
-        margin-right: 10px;
-      }
+  .sale_rate_echarts {
+    width: 100%;
+    height: 280px;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+}
+.add_user {
+  .header {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    .add_user_name {
+      padding-left: 15px;
+      font-size: 15px;
     }
+    .add_user_name::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 14px;
+      background-color: #2682f8;
+      margin-right: 10px;
+    }
+  }
 
-    .add_user_echarts {
-      width: 100%;
-      height: 280px;
-      border-radius: 5px;
-      background-color: #fff;
-    }
+  .add_user_echarts {
+    width: 100%;
+    height: 280px;
+    border-radius: 5px;
+    background-color: #fff;
   }
 }
 
 // 第san行
-.four_row {
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  // 销售数据趋势
-  .sale_trend {
-    width: 59.5%;
-    .sale_trend_header {
-      padding-bottom: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 15px;
-      .header {
-        display: flex;
-        align-items: center;
-        .sale_trend_name {
-          padding-left: 15px;
-        }
-        .sale_trend_name::before {
-          content: '';
-          display: inline-block;
-          width: 5px;
-          height: 14px;
-          background-color: #2682f8;
-          margin-right: 10px;
-        }
-      }
-    }
-    .sale_trend_echarts {
-      width: 100%;
-      height: 280px;
-      border-radius: 5px;
-      background-color: #fff;
-    }
-  }
-  .sale_rank {
-    width: 39.8%;
+// 销售数据趋势
+.sale_trend {
+  .sale_trend_header {
+    padding-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
     .header {
-      margin-bottom: 15px;
       display: flex;
       align-items: center;
-      height: 32px;
-      .sale_rank_name {
+      .sale_trend_name {
         padding-left: 15px;
-        font-size: 15px;
       }
-      .sale_rank_name::before {
+      .sale_trend_name::before {
         content: '';
         display: inline-block;
         width: 5px;
@@ -775,13 +805,39 @@ const toggleDate = async (num: any, type: any) => {
         margin-right: 10px;
       }
     }
-
-    .sale_rank_echarts {
-      width: 100%;
-      height: 280px;
-      border-radius: 5px;
-      background-color: #fff;
+  }
+  .sale_trend_echarts {
+    width: 100%;
+    height: 280px;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+}
+.sale_rank {
+  .header {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    height: 32px;
+    .sale_rank_name {
+      padding-left: 15px;
+      font-size: 15px;
     }
+    .sale_rank_name::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 14px;
+      background-color: #2682f8;
+      margin-right: 10px;
+    }
+  }
+
+  .sale_rank_echarts {
+    width: 100%;
+    height: 280px;
+    border-radius: 5px;
+    background-color: #fff;
   }
 }
 :deep(.el-tabs) {
