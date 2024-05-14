@@ -3,11 +3,8 @@ import Echarts from '@/components/echart.vue'
 import { ref } from 'vue'
 import type { dataType, pieType, turnOverType } from '@/models/home'
 import InitDialog from '@/views/home/initDialog.vue'
-import NumberAnimation from '@/components/NumberAnimation.vue'
-import { useWindowSize } from '@vueuse/core'
 import PanelGroup from '@/views/home/components/panelGroup.vue'
 
-const { width: windowWidth } = useWindowSize()
 // 创建数据概览数据
 const data = ref<dataType>({
   order_amount: 2000,

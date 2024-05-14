@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { ElMessage } from 'element-plus'
-import { useWindowSize } from '@vueuse/core'
 
-const { width: windowWidth } = useWindowSize()
 // 按钮当前选中状态
 const activeColor = ref<any>('')
 const theme_color = ref('#FF4B40')
