@@ -17,29 +17,25 @@ function onClick() {
 </script>
 <template>
   <el-card class="card-box">
-    <h1>NumberAnimation 数值动画</h1>
-    <br />
-    <h3 class="mt30 mb10">基本使用(value: 100000000.12345)</h3>
-    <br />
-    <el-row>
-      <el-col :span="5">
+    <h1 class="margin-bottom-sm">NumberAnimation 数值动画</h1>
+    <h3 class="margin-bottom-sm">基本使用(value: 100000000.12345)</h3>
+    <el-row :gutter="20">
+      <el-col class="margin-bottom-sm" :xl="12" :lg="12" :md="12" :sm="12" :xs="24">
         <p>一个小目标</p>
         <NumberAnimation ref="animationRef" :from="0" :to="100000000.12345" />
       </el-col>
-      <el-col :span="5">
+      <el-col class="margin-bottom-sm" :xl="12" :lg="12" :md="12" :sm="12" :xs="24">
         <p @click="onClick">一个小目标</p>
         <NumberAnimation ref="animationRef" :from="0" :to="100000000.12345" separator="" />
       </el-col>
     </el-row>
-    <br />
-    <h3 class="mt30 mb10">精度(value: 100000000.12345)</h3>
-    <br />
+    <h3 class="margin-bottom-sm">精度(value: 100000000.12345)</h3>
     <el-row>
-      <el-col :span="5">
+      <el-col class="margin-bottom-sm" :xl="12" :lg="12" :md="12" :sm="12" :xs="24">
         <p>一个小目标</p>
         <NumberAnimation :to="100000000.12345" :precision="2" />
       </el-col>
-      <el-col :span="5">
+      <el-col class="margin-bottom-sm" :xl="12" :lg="12" :md="12" :sm="12" :xs="24">
         <p @click="onClick">一个小目标</p>
         <NumberAnimation
           ref="animationRef"
@@ -50,32 +46,27 @@ function onClick() {
         />
       </el-col>
     </el-row>
-    <br />
-    <h3 class="mt30 mb10">自定义前缀 & 后缀(value:100000000.12345)</h3>
-    <br />
-    <el-row>
-      <el-col :span="5">
+    <h3 class="margin-bottom-sm">自定义前缀 & 后缀(value:100000000.12345)</h3>
+    <el-row :gutter="20">
+      <el-col class="margin-bottom-sm" :xl="12" :lg="12" :md="12" :sm="12" :xs="24">
         <p>一个小目标</p>
         <NumberAnimation :to="100000000.12345" prefix="￥" />
       </el-col>
-      <el-col :span="5">
+      <el-col class="margin-bottom-sm" :xl="12" :lg="12" :md="12" :sm="12" :xs="24">
         <p>一个小目标</p>
         <NumberAnimation :to="100000000.12345" suffix="元" separator="" />
       </el-col>
     </el-row>
-    <br />
-
-    <h3 class="mt30 mb10">自定义样式(value:100000000.12345)</h3>
-    <br />
-    <el-row>
-      <el-col :span="5">
+    <h3 class="margin-bottom-sm">自定义样式(value:100000000.12345)</h3>
+    <el-row :gutter="20">
+      <el-col class="margin-bottom-sm" :xl="12" :lg="12" :md="12" :sm="12" :xs="24">
         <p>一个小目标</p>
         <NumberAnimation
           :to="100000000.12345"
           :value-style="{ fontSize: '30px', fontWeight: 600, color: '#d4380d' }"
         />
       </el-col>
-      <el-col :span="5">
+      <el-col class="margin-bottom-sm" :xl="12" :lg="12" :md="12" :sm="12" :xs="24">
         <p>一个小目标</p>
         <NumberAnimation
           :to="100000000.12345"
@@ -84,12 +75,9 @@ function onClick() {
         />
       </el-col>
     </el-row>
-    <br />
-
-    <h3 class="mt30 mb10">自定义播放和动画时间(value:100000000.12345)</h3>
-    <br />
+    <h3 class="margin-bottom-sm">自定义播放和动画时间(value:100000000.12345)</h3>
     <el-row>
-      <el-col :span="5">
+      <el-col class="margin-bottom-sm" :xl="24" :lg="24" :md="24" :sm="24" :xs="24">
         <p>一个小目标</p>
         <NumberAnimation
           ref="animationRef"
