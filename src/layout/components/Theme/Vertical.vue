@@ -68,6 +68,7 @@
               <menu-icon icon="home" />
               <span
                 v-if="appStore.sidebarOpened"
+                style="font-size: 14px"
                 class="title"
                 :class="{ active: defaultActive === '/home' }"
                 >系统首页</span
