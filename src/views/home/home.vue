@@ -5,6 +5,7 @@ import type { dataType, pieType, turnOverType } from '@/models/home'
 import InitDialog from '@/views/home/initDialog.vue'
 import NumberAnimation from '@/components/NumberAnimation.vue'
 import { useWindowSize } from '@vueuse/core'
+import PanelGroup from '@/views/home/components/panelGroup.vue'
 
 const { width: windowWidth } = useWindowSize()
 // 创建数据概览数据
@@ -95,7 +96,7 @@ const orderCategoryInfo = ref<pieType>({
   },
   // 图例组件
   legend: {
-    bottom: '5%',
+    bottom: '0%',
     data: ['手机', '玩乐', '淘淘']
   },
   // 配置项
@@ -131,9 +132,9 @@ const orderAddUser = ref<turnOverType>({
   grid: {
     show: false,
     top: '16%', // 一下数值可为百分比也可为具体像素值
-    right: '5%',
+    right: '8%',
     bottom: '10%',
-    left: '8%'
+    left: '10%'
   },
   tooltip: {
     trigger: 'axis',
@@ -370,166 +371,45 @@ const toggleDate = async (num: any, type: any) => {
     <!-- 今日数据概览 -->
 
     <div class="today_overview" v-if="data">
-      <div class="header">
+      <div class="header margin-bottom-sm">
         <h4 class="title">今日数据概览</h4>
       </div>
-      <el-row class="overview_content" :gutter="10">
-        <el-col
-          :style="{
-            marginBottom: windowWidth >= 1200 ? '0' : '10px'
-          }"
-          :xs="24"
-          :sm="12"
-          :md="8"
-          :lg="5"
-          :xl="5"
-        >
-          <div class="card_box">
-            <div class="card_info">
-              <p class="name">订单金额</p>
-              <NumberAnimation
-                :to="Number(data.order_amount)"
-                separator=""
-                :value-style="{ fontSize: '24px', fontWeight: 'bold', color: '#333' }"
-              ></NumberAnimation>
-              <span class="price">元</span>
-            </div>
-            <img src="@/assets/home/header_order_price.png" alt="" />
-          </div>
-        </el-col>
-        <el-col
-          :style="{
-            marginBottom: windowWidth >= 1200 ? '0' : '10px'
-          }"
-          :xs="24"
-          :sm="12"
-          :md="8"
-          :lg="5"
-          :xl="5"
-        >
-          <div class="card_box">
-            <div class="card_info">
-              <p class="name">订单数</p>
-              <NumberAnimation
-                :to="Number(data.order_count)"
-                separator=""
-                :value-style="{ fontSize: '24px', fontWeight: 'bold', color: '#333' }"
-              ></NumberAnimation>
-              <span class="price">个</span>
-            </div>
-            <img src="@/assets/home/header_order_num.png" alt="" />
-          </div>
-        </el-col>
-        <el-col
-          :style="{
-            marginBottom: windowWidth >= 1200 ? '0' : '10px'
-          }"
-          :xs="24"
-          :sm="12"
-          :md="8"
-          :lg="5"
-          :xl="5"
-        >
-          <div class="card_box">
-            <div class="card_info">
-              <p class="name">退款金额</p>
-              <NumberAnimation
-                :to="Number(data.after_sale_amount)"
-                separator=""
-                :value-style="{ fontSize: '24px', fontWeight: 'bold', color: '#333' }"
-              ></NumberAnimation>
-              <span class="price">元</span>
-            </div>
-            <img src="@/assets/home/header_refund_price.png" alt="" />
-          </div>
-        </el-col>
-        <el-col
-          :style="{
-            marginBottom: windowWidth >= 992 ? '0' : '10px'
-          }"
-          :xs="24"
-          :sm="12"
-          :md="12"
-          :lg="5"
-          :xl="5"
-        >
-          <div class="card_box">
-            <div class="card_info">
-              <p class="name">退款数</p>
-              <NumberAnimation
-                :to="Number(data.after_sale_count)"
-                separator=""
-                :value-style="{ fontSize: '24px', fontWeight: 'bold', color: '#333' }"
-              ></NumberAnimation>
-              <span class="price">个</span>
-            </div>
-            <img src="@/assets/home/header_refund_num.png" alt="" />
-          </div>
-        </el-col>
-        <el-col :xs="24" :sm="12" :md="12" :lg="5" :xl="5">
-          <div class="card_box">
-            <div class="card_info">
-              <p class="name">新增用户</p>
-              <NumberAnimation
-                :to="Number(data.today_user_count)"
-                separator=""
-                :value-style="{ fontSize: '24px', fontWeight: 'bold', color: '#333' }"
-              ></NumberAnimation>
-              <span class="price">个</span>
-            </div>
-            <img src="@/assets/home/header_add_user.png" alt="" />
-          </div>
-        </el-col>
-      </el-row>
+      <panel-group></panel-group>
     </div>
     <!-- two_row -->
-    <el-row class="row_margin_bottom" :gutter="10">
-      <el-col
-        :style="{
-          marginBottom: windowWidth >= 1200 ? '0' : '20px'
-        }"
-        :xs="24"
-        :sm="24"
-        :md="12"
-        :lg="8"
-        :xl="8"
-      >
+    <el-row :gutter="20">
+      <el-col :xs="24" :sm="24" :md="12" :lg="8" :xl="8">
         <div class="cost_times">
           <div class="header">
             <h4 class="cost_times_name">消费次数分析</h4>
           </div>
-          <div class="cost_times_echarts">
-            <echarts
-              v-if="orderCustomCount.series[0].data.length > 0"
-              height="280"
-              :order="orderCustomCount"
-            />
-            <el-empty v-else></el-empty>
-          </div>
+          <el-card class="margin-bottom-sm">
+            <div class="cost_times_echarts">
+              <echarts
+                v-if="orderCustomCount.series[0].data.length > 0"
+                height="280"
+                :order="orderCustomCount"
+              />
+              <el-empty v-else></el-empty>
+            </div>
+          </el-card>
         </div>
       </el-col>
-      <el-col
-        :style="{
-          marginBottom: windowWidth >= 1200 ? '0' : '20px'
-        }"
-        :xs="24"
-        :sm="24"
-        :md="12"
-        :lg="8"
-        :xl="8"
-      >
+      <el-col :xs="24" :sm="24" :md="12" :lg="8" :xl="8">
         <div class="sale_rate">
           <div class="header">
             <h4 class="sale_rate_name">商品分类销售占比</h4>
           </div>
-          <div class="sale_rate_echarts">
-            <echarts
-              v-if="orderCategoryInfo.series[0].data.length > 0"
-              height="280"
-              :order="orderCategoryInfo"
-            />
-            <el-empty v-else></el-empty>
-          </div>
+          <el-card class="margin-bottom-sm">
+            <div class="sale_rate_echarts">
+              <echarts
+                v-if="orderCategoryInfo.series[0].data.length > 0"
+                height="280"
+                :order="orderCategoryInfo"
+              />
+              <el-empty v-else></el-empty>
+            </div>
+          </el-card>
         </div>
       </el-col>
       <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
@@ -537,31 +417,23 @@ const toggleDate = async (num: any, type: any) => {
           <div class="header">
             <h4 class="add_user_name">新增用户趋势</h4>
           </div>
-
-          <div class="add_user_echarts">
-            <echarts
-              v-if="orderAddUser.series[0].data.length > 0"
-              height="280"
-              :order="orderAddUser"
-            />
-            <el-empty v-else></el-empty>
-          </div>
+          <el-card class="margin-bottom-sm">
+            <div class="add_user_echarts">
+              <echarts
+                v-if="orderAddUser.series[0].data.length > 0"
+                height="280"
+                :order="orderAddUser"
+              />
+              <el-empty v-else></el-empty>
+            </div>
+          </el-card>
         </div>
       </el-col>
     </el-row>
 
     <!--  three_row  -->
     <el-row :gutter="10">
-      <el-col
-        :style="{
-          marginBottom: windowWidth >= 1200 ? '0' : '20px'
-        }"
-        :xs="24"
-        :sm="24"
-        :md="12"
-        :lg="12"
-        :xl="12"
-      >
+      <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
         <!-- 销售数据趋势 -->
         <div class="sale_trend">
           <div class="sale_trend_header">
@@ -585,14 +457,16 @@ const toggleDate = async (num: any, type: any) => {
               </el-tabs>
             </div>
           </div>
-          <div class="sale_trend_echarts">
-            <echarts
-              v-if="orderSalesData.series[0].data.length > 0"
-              height="280"
-              :order="orderSalesData"
-            />
-            <el-empty v-else></el-empty>
-          </div>
+          <el-card class="margin-bottom-sm">
+            <div class="sale_trend_echarts">
+              <echarts
+                v-if="orderSalesData.series[0].data.length > 0"
+                height="280"
+                :order="orderSalesData"
+              />
+              <el-empty v-else></el-empty>
+            </div>
+          </el-card>
         </div>
       </el-col>
       <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
@@ -600,26 +474,28 @@ const toggleDate = async (num: any, type: any) => {
           <div class="header">
             <h4 class="sale_rank_name">商品销售排行榜</h4>
           </div>
-          <div class="sale_rank_echarts">
-            <el-table
-              :data="goodsRank"
-              class="table_style"
-              :cell-style="{ textAlign: 'center' }"
-              :header-cell-style="{ textAlign: 'center' }"
-              show-overflow-tooltip
-            >
-              <el-table-column prop="title" label="商品名称">
-                <template #default="{ row }">
-                  <el-text truncated>{{ row.title }}</el-text>
+          <el-card class="margin-bottom-sm">
+            <div class="sale_rank_echarts">
+              <el-table
+                :data="goodsRank"
+                class="table_style"
+                :cell-style="{ textAlign: 'center' }"
+                :header-cell-style="{ textAlign: 'center' }"
+                show-overflow-tooltip
+              >
+                <el-table-column prop="title" label="商品名称">
+                  <template #default="{ row }">
+                    <el-text truncated>{{ row.title }}</el-text>
+                  </template>
+                </el-table-column>
+                <el-table-column prop="sales_amount" label="销售额（元）"></el-table-column>
+                <el-table-column prop="sales" label="销量"></el-table-column>
+                <template #empty>
+                  <el-empty></el-empty>
                 </template>
-              </el-table-column>
-              <el-table-column prop="sales_amount" label="销售额（元）"></el-table-column>
-              <el-table-column prop="sales" label="销量"></el-table-column>
-              <template #empty>
-                <el-empty></el-empty>
-              </template>
-            </el-table>
-          </div>
+              </el-table>
+            </div>
+          </el-card>
         </div>
       </el-col>
     </el-row>
@@ -636,7 +512,6 @@ const toggleDate = async (num: any, type: any) => {
 
 // 今日概览
 .today_overview {
-  margin-bottom: 20px;
   .header {
     display: flex;
     align-items: center;
@@ -653,51 +528,8 @@ const toggleDate = async (num: any, type: any) => {
       margin-right: 10px;
     }
   }
+}
 
-  .overview_content {
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    .card_box {
-      padding: 24px;
-      flex: 1;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 123px;
-      border-radius: 5px;
-      background-color: #fff;
-      .card_info {
-        height: 66px;
-        .name {
-          margin-bottom: 10px;
-          //width: 68px;
-          height: 20px;
-          font-size: 16px;
-          color: #999999;
-        }
-        .info {
-          font-size: 24px;
-          font-weight: bold;
-          color: #333333;
-          .price {
-            font-size: 14px;
-            font-weight: 400;
-            color: #999999;
-          }
-        }
-      }
-      img {
-        width: 48px;
-        height: 48px;
-      }
-    }
-  }
-}
-.row_margin_bottom {
-  margin-bottom: 20px;
-}
 .today_overview_col {
   margin-bottom: 10px;
 }
@@ -851,11 +683,5 @@ const toggleDate = async (num: any, type: any) => {
 .table_style {
   width: 100%;
   height: 100%;
-}
-
-@media only screen and (min-width: 1200px) {
-  .el-col-lg-5 {
-    max-width: 20%;
-  }
 }
 </style>
