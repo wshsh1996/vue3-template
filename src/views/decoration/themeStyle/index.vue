@@ -31,25 +31,27 @@ onMounted(() => {
   <el-card>
     <div class="color-box">
       <div class="color-select">
-        <el-row :gutter="10" align="middle" justify="start">
-          <el-col style="margin-bottom: 10px" :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+        <el-row :gutter="20" align="middle" justify="start">
+          <el-col class="margin-bottom-xs" :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
             <div>选择配色方案:</div>
           </el-col>
-          <el-col :xs="12" :sm="6" :md="3" :lg="2" :xl="2">
-            <div :class="{ active: activeColor === '#32b7de' }" @click="setActiveStatus('#32b7de')">
-              <div class="btn" style="background-color: #32b7de"></div>
-              <span>天空蓝</span>
-            </div>
-            <!--            <el-button-->
-            <!--              :class="{ active: activeColor === '#32b7de' }"-->
-            <!--              size="large"-->
-            <!--              @click="setActiveStatus('#32b7de')"-->
-            <!--            >-->
+        </el-row>
+        <el-row :gutter="20" align="middle">
+          <el-col class="margin-bottom-sm" :xs="12" :sm="6" :md="3" :lg="2" :xl="2">
+            <!--            <div :class="{ active: activeColor === '#32b7de' }" @click="setActiveStatus('#32b7de')">-->
             <!--              <div class="btn" style="background-color: #32b7de"></div>-->
             <!--              <span>天空蓝</span>-->
-            <!--            </el-button>-->
+            <!--            </div>-->
+            <el-button
+              :class="{ active: activeColor === '#32b7de' }"
+              size="large"
+              @click="setActiveStatus('#32b7de')"
+            >
+              <div class="btn" style="background-color: #32b7de"></div>
+              <span>天空蓝</span>
+            </el-button>
           </el-col>
-          <el-col :xs="12" :sm="6" :md="3" :lg="2" :xl="2">
+          <el-col class="margin-bottom-sm" :xs="12" :sm="6" :md="3" :lg="2" :xl="2">
             <el-button
               size="large"
               :class="{ active: activeColor === '#42ca4d' }"
@@ -59,7 +61,7 @@ onMounted(() => {
               <span>生鲜绿</span>
             </el-button>
           </el-col>
-          <el-col :xs="12" :sm="6" :md="3" :lg="2" :xl="2">
+          <el-col class="margin-bottom-sm" :xs="12" :sm="6" :md="3" :lg="2" :xl="2">
             <el-button
               size="large"
               :class="{ active: activeColor === '#e93323' }"
@@ -69,7 +71,7 @@ onMounted(() => {
               <span>热情红</span>
             </el-button>
           </el-col>
-          <el-col :xs="12" :sm="6" :md="15" :lg="2" :xl="2">
+          <el-col class="margin-bottom-sm" :xs="12" :sm="6" :md="15" :lg="2" :xl="2">
             <el-button
               size="large"
               :class="{ active: activeColor === '#ff448f' }"
@@ -79,7 +81,7 @@ onMounted(() => {
               <span>魅力粉</span>
             </el-button>
           </el-col>
-          <el-col :xs="12" :sm="6" :md="3" :lg="2" :xl="2">
+          <el-col class="margin-bottom-sm" :xs="12" :sm="6" :md="3" :lg="2" :xl="2">
             <el-button
               size="large"
               :class="{ active: activeColor === '#FF6600' }"
@@ -89,7 +91,7 @@ onMounted(() => {
               <span>活力橙</span>
             </el-button>
           </el-col>
-          <el-col :xs="12" :sm="6" :md="3" :lg="2" :xl="2">
+          <el-col class="margin-bottom-sm" :xs="12" :sm="6" :md="3" :lg="2" :xl="2">
             <el-button
               size="large"
               :class="{ active: activeColor === '#e0a558' }"
@@ -99,7 +101,7 @@ onMounted(() => {
               <span>高端金</span>
             </el-button>
           </el-col>
-          <el-col :xs="12" :sm="6" :md="3" :lg="2" :xl="2">
+          <el-col class="margin-bottom-sm" :xs="12" :sm="6" :md="3" :lg="2" :xl="2">
             <el-button
               size="large"
               :class="{ active: activeColor === '#FF4B40' }"
@@ -182,7 +184,6 @@ onMounted(() => {
 .color-select,
 .tab-image {
   margin-left: 20px;
-  margin-bottom: 20px;
   width: 100%;
 }
 .btn {

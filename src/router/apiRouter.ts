@@ -19,6 +19,15 @@ const apiRouter: IMenu[] = [
           title: '数值动画',
           permission: ['numberAnimationCase']
         }
+      },
+      {
+        path: '/modules/mergeCell',
+        name: 'mergeCell',
+        component: '/modules/mergeCell/index',
+        meta: {
+          title: '合并表格',
+          permission: ['mergeCell']
+        }
       }
     ]
   },
